@@ -12,21 +12,21 @@ __all__ = ["check", "enable", "disable"]
 
 HAS_FIND_SYNTAX = hasattr(sublime, "list_syntaxes")
 
-EMPTY_TEMPLATE = dedent(
-    """
-    %YAML 1.2
-    ---
-    name: {0}
-    scope: {1}
-    hidden: true
-    file_extensions:
-      - {2}
-    contexts:
-      main: []
-    """
-).lstrip()
-
 if int(sublime.version()) > 4075:
+    EMPTY_TEMPLATE = dedent(
+        """
+        %YAML 1.2
+        ---
+        name: {0}
+        scope: {1}
+        hidden: true
+        hidden_file_extensions:
+          - {2}
+        contexts:
+          main: []
+        """
+    ).lstrip()
+
     MAIN_TEMPLATE = dedent(
         """
         %YAML 1.2
@@ -34,7 +34,7 @@ if int(sublime.version()) > 4075:
         name: {0}
         scope: {1}
         hidden: true
-        file_extensions:
+        hidden_file_extensions:
           - {2}
         contexts:
           main:
@@ -44,6 +44,20 @@ if int(sublime.version()) > 4075:
     ).lstrip()
 
 else:
+    EMPTY_TEMPLATE = dedent(
+        """
+        %YAML 1.2
+        ---
+        name: {0}
+        scope: {1}
+        hidden: true
+        file_extensions:
+          - {2}
+        contexts:
+          main: []
+        """
+    ).lstrip()
+
     MAIN_TEMPLATE = dedent(
         """
         %YAML 1.2
